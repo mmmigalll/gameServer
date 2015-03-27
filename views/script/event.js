@@ -21,7 +21,7 @@ $(document).ready(function(){
 	var canClick = true;
 	var x = 0;
 	var y = 150;
-	var xS = 500;
+	var xS = 920;
 	var yS = 150;
 	
 	var game = new Rect(0, 0, 1000, 400); // створюємо поле для бою
@@ -30,8 +30,55 @@ $(document).ready(function(){
 
 	var counterClick = 0; // лічильник для визначення парності або непарності кліку (в залежності від ліч. ходить один або інший герой)
 
-	$("#f1").text(warrior.name + "(Warior) health: " + warrior.health);
+	$("#f1").text(warrior.name + "(Warrior) health: " + warrior.health);
 	$("#f2").text(wizard.name + "(Wizard) health: " + wizard.health);
+
+	var xQ = $("#x").html();
+	var yQ = $('#y').html();
+
+	if (xQ && yQ){
+		x = xQ;
+		y = 400 - yQ;
+		var vxQ;
+		var vyQ;
+		var distanceQ = 0;
+		var counterQ = 0;
+		var x2Q = warrior.x;
+		var y2Q = warrior.y;
+
+		if (Math.abs(x - x2Q) > Math.abs(y - y2Q)){
+			vxQ = 5 * (x - x2Q) / Math.abs(x - x2Q);
+			vyQ = 5 * (y - y2Q) / Math.abs(x - x2Q);
+		}
+
+		else if (Math.abs(x - x2Q) < Math.abs(y - y2Q)){
+			vxQ = 5 * (x - x2Q) / Math.abs(y - y2Q);
+			vyQ = 5 * (y - y2Q) / Math.abs(y - y2Q);
+		}
+
+		var sQ = Math.sqrt(vxQ * vxQ + vyQ * vyQ);
+
+		//alert(vX + ' ' + vY);
+		var img;
+
+		var background = document.getElementById("textures");
+		var canvasQ = document.getElementById("myCanvas");
+		context = canvasQ.getContext("2d");
+		canvasQ.width = game.width;
+		canvasQ.height = game.height;
+
+		var moveObjectQ = {}; // параметри для переачі даних про героїв і поля бою в метод "прорисовки" руху або бою
+		moveObjectQ.x = x;
+		moveObjectQ.y = y;
+		moveObjectQ.vX = vxQ;
+		moveObjectQ.vY = vyQ;
+		moveObjectQ.game = game;
+		moveObjectQ.enemy = wizard;
+		moveObjectQ.background = background;
+		moveObjectQ.distance = distanceQ;
+		warrior.drawMove(sQ, counterQ, 0, moveObjectQ);
+	}
+
 
 	$("#myCanvas").click(function(e){
 		if (canClick){ // якщо не закінчився бій
@@ -128,9 +175,32 @@ $(document).ready(function(){
 				var d = Line.distanceMeasure(hero.x, hero.y, barriers[i].x, barriers[i].y)
 				if (Line.dotOnLine(hero.x, hero.y, x1, y1, barriers[i].x, barriers[i].y ) && d < hero.rangeMove){
 
+					var d1 = Line.distanceMeasure(hero.x, hero.y,  barriers[i].x, barriers[i].y);
+					var d2 = Line.distanceMeasure(hero.x, hero.y,  barriers[i].x, barriers[i].y + 40);
+					var d3 = Line.distanceMeasure(hero.x, hero.y,  barriers[i].x + 40, barriers[i].y);
+					var d4 = Line.distanceMeasure(hero.x, hero.y,  barriers[i].x + 40, barriers[i].y + 40);
+
+					var min = Math.min(d1, d2, d3, d4);
+
+
 					console.log("___BAR___");
-					x = barriers[i].x - 70;
-					y = barriers[i].y - 70;
+
+					if (min === d1){
+						x = barriers[i].x - 20;
+						y = barriers[i].y - 20;
+					}
+					else if(min === d2){
+						x = barriers[i].x - 20;
+						y = barriers[i].y + 20;
+					}
+					else if(min === d3){
+						x = barriers[i].x + 20;
+						y = barriers[i].y - 20;
+					}
+					else {
+						x = barriers[i].x + 20;
+						y = barriers[i].y + 20;
+					}
 
 					console.log("b" + barriers[i].x+'X'+ barriers[i].y);
 					console.log('Hero moves from' + hero.x + "X" + hero.y);
@@ -168,7 +238,7 @@ $(document).ready(function(){
 
 					var x11 = Math.round(e.pageX - elem_left1);
 					var y11 = Math.round(e.pageY - elem_top1);
-					console.log(x11 + "x" + y11)
+					console.log(x11 + "x" + y11);
 					console.log(enemy.x + "xx" + enemy.y);
 					if (x11 > hero.x && x11 < hero.x + 55 && y11 > hero.y && y11 < hero.y + 77){
 						$("#myCanvas").mousemove(function(){
