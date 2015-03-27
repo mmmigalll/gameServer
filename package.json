@@ -1,0 +1,12 @@
+{
+  "name": "gameServer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "author": "Vashkeba",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.12.3",
+    "swig": "^1.4.2"
+  }
+}

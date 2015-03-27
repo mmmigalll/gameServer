@@ -1,0 +1,104 @@
+.clear{
+	clear: both;
+}
+body{
+	margin: 10px;
+	background-color: gray;
+}
+	body>img{
+		display: none;
+	}
+	body #heroForm{
+		display: none;
+		width: 980px;
+		margin: 0 auto;
+		border: 1px solid #98bf21;
+		padding: 10px;
+		background-color: #98bf21;
+	}
+		body #heroForm .w{
+			display: inline-block;
+			width: 250px;
+		}
+		body #heroForm .pos{
+			margin-left: -20px;
+		}
+
+	body #myCanvas{
+		display: block;
+		margin: 0 auto;
+		border: 1px solid #98bf21;
+		background-image: url(../img/textures.jpg);
+	}
+		body #myCanvas:hover{
+			cursor: url(../img/curs.png), auto;
+		}
+	body #abHero1{
+		padding: 0;
+		margin: 0 auto;
+		width: 1000px;
+		height: 180px;
+		border: 1px solid #98bf21;
+	}
+		body #abHero1 #moving{
+			width: 978px;
+			height: 30px;
+			margin: -5px 10px;
+			border: 1px solid #98bf21;
+			text-align: center;
+			font-size: 18px;
+			font-family: cursive;
+		}
+			body #abHero1 #moving label{
+				display: inline-block;
+				margin-right: 10px;
+			}
+		body #abHero1 .block{
+			margin: 10px;
+			padding: 0;
+			width: 478px;
+			height: 130px;
+			border: 1px solid #98bf21;
+			float: left;
+		}
+			body #abHero1 .block .heroName{
+				margin: 0;
+				width: 478px;
+				height: 30px;
+				background-color: #9fd477;
+				text-align: center;
+				font-size: 20px;
+				font-family: cursive;
+			}
+			body #abHero1 .block .heroAction{
+				margin: 0;
+				width: 250px;
+				height: 90px;
+				background-color: gray;
+				text-align: center;
+				font-size: 12px;
+				font-family: cursive;
+				float: left;
+			}
+				body #abHero1 .block .heroAction>p{
+					margin: 5px;
+					padding: 0;
+				}
+			body #abHero1 .block .acH {
+				margin: 10px;
+				text-align: center;
+				font-size: 12px;
+				font-family: cursive;
+			}
+				body #abHero1 .block .acH>p{
+					margin: 5px;
+					padding: 0;
+				}
+	body #winner{
+		margin: 0 auto;
+		width: 1000px;
+		height: 40px;
+		text-align: center;
+		font-size: 25px;
+		font-family: cursive;
+	}
